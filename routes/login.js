@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
+var mysql = require('mysql');
 let dbConfig = require("../database/DBConfig");
 var userSQL = require("../database/usersql");
+var pool = mysql.createPool(dbConfig.mysql);
 
+// 响应一个JSON数据
 
 /* GET index page. */
 router.get('/login', function (req, res, next) {   //当路由截取到localhost:3000 get请求后，根据Index.jade模板来渲染页面，并传递参数 title
@@ -27,16 +30,13 @@ router.post('/login', function (req, res, next) {
     }
     //查库比较
     pool.getConnection(function (err, connection) {
-        connection.query(userSQL.insert, [username, userpwd], function (err, result) {
-            if (result) {
-                result = {
-                    code: 200,
-                    msg: "添加成功"
-                }
-            }
-            // 以json形式，把操作结果返回给前台页面
-            responseJSON(res, result);
+        connection.query(userSQL.query, [username, userpwd], function (err, result) {
             // 释放连接
+            if (result != null) {
+                res.json({
+                    code: '200', msg: '登陆成功','nickname':result[0]['nickname']
+                });
+            }
             connection.release();
         })
     })
