@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="/javascripts/jquery-2.0.3.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <h1>登录</h1>
+    <p>Welcome to <%= title %></p>
+    <form action="/login/login" class="form-horizontal" method="post">
+        <div class="form-group">
+            <label class="">账号：</label>
+            <input type="text" class="form-control" name="username" id="username" placeholder="请输入用户名"  />
+        </div>
+        <div class="form-group">
+            <label for="">密码：</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码"  />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" id="loginBtn">登录</button>
+            <buttton type="button" class="btn btn-default" id="register">注册</buttton>
+        </div>
+    </form>
+</body>
+
+</html>
